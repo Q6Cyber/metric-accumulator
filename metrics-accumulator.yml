@@ -1,8 +1,7 @@
 ---
-
 global:
   restartCronExpression: "0 0 0 ? * *"
-  hostAddress: localhost:8080
+  hostAddress: prometheus-metrics-accumulator-dev.internal.q6cyber.com
 
 metricGroups:
   default:
@@ -10,4 +9,16 @@ metricGroups:
     name: default
     maxTimeSeries: 2500
     apiKey: 0d98f65f-074b-4d56-b834-576e15a3bfa5
+    restartCronExpression: "0 0 0 ? * *"
+  botnetSorter:
+    displayMetrics: true
+    name: botnet-sorter
+    maxTimeSeries: 2500
+    apiKey: 0d98f65f-074b-4d56-b834-576e15a3ffa5
+    restartCronExpression: "0 0 0 ? * *"
+  cdf:
+    displayMetrics: true
+    name: cdf
+    maxTimeSeries: 2500
+    apiKey: 4t98f65f-074b-4d56-b834-576e11a3bfa5
     restartCronExpression: "0 0 0 ? * *"
