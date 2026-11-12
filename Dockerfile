@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+FROM azul-zulu:17
 COPY metrics-accumulator.yml /etc/metrics-accumulator/metrics-accumulator.yml
 COPY target/app.jar /
 ENTRYPOINT ["java","-jar","/app.jar"]
