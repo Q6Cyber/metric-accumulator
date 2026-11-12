@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.prometheus.metrics.model.registry.PrometheusRegistry;
-import prometheus.text.TextPrometheusMetricDataParser;
-import prometheus.types.MetricFamily;
-import prometheus.types.MetricType;
+import io.bpoole6.accumulator.scraper.text.TextPrometheusMetricDataParser;
+import io.bpoole6.accumulator.scraper.types.MetricFamily;
+import io.bpoole6.accumulator.scraper.types.MetricType;
 
 public class Utils {
   public static List<MetricFamily> readMetrics(String metrics) throws IOException {

@@ -7,9 +7,9 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import prometheus.types.Metric;
-import prometheus.types.MetricFamily;
-import prometheus.types.MetricType;
+import io.bpoole6.accumulator.scraper.types.Metric;
+import io.bpoole6.accumulator.scraper.types.MetricFamily;
+import io.bpoole6.accumulator.scraper.types.MetricType;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -70,9 +70,9 @@ public class MetricService {
         MetricQueueItem item;
         while ((item = itemsToBeProcessed.poll()) != null) {
           if (item.getMetricType() == MetricType.COUNTER) {
-            this.registryRepository.incrementCounter(item.getMetricKey(), (prometheus.types.Counter) item.getMetric());
+            this.registryRepository.incrementCounter(item.getMetricKey(), (io.bpoole6.accumulator.scraper.types.Counter) item.getMetric());
           } else if (item.getMetricType() == MetricType.GAUGE) {
-            this.registryRepository.setGauge(item.getMetricKey(), (prometheus.types.Gauge) item.getMetric());
+            this.registryRepository.setGauge(item.getMetricKey(), (io.bpoole6.accumulator.scraper.types.Gauge) item.getMetric());
           }else{
             log.warn("Unsupported Type: {} ", item);
           }

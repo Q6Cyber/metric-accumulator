@@ -33,10 +33,10 @@ public class RegistryRepository {
   public MetricManager getRegistry(Group metricGroup) {
     return this.registryMap.get(metricGroup);
   }
-  public void incrementCounter(MetricKey metricKey, prometheus.types.Counter metric) {
+  public void incrementCounter(MetricKey metricKey,io.bpoole6.accumulator.scraper.types.Counter metric) {
     this.registryMap.get(metricKey.getMetricGroup()).incrementCounter(metricKey, metric);
   }
-  public void setGauge(MetricKey metricKey, prometheus.types.Gauge metric) {
+  public void setGauge(MetricKey metricKey,io.bpoole6.accumulator.scraper.types.Gauge metric) {
     this.registryMap.get(metricKey.getMetricGroup()).setGauge(metricKey, metric);
   }
 
