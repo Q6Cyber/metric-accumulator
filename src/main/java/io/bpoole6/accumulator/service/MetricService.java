@@ -73,6 +73,8 @@ public class MetricService {
             this.registryRepository.incrementCounter(item.getMetricKey(), (prometheus.types.Counter) item.getMetric());
           } else if (item.getMetricType() == MetricType.GAUGE) {
             this.registryRepository.setGauge(item.getMetricKey(), (prometheus.types.Gauge) item.getMetric());
+          }else{
+            log.warn("Unsupported Type: {} ", item);
           }
         }
       } catch (Exception e) {
