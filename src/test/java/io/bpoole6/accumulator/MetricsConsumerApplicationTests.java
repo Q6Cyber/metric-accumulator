@@ -18,11 +18,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 import org.springframework.test.annotation.DirtiesContext;
-import prometheus.types.Counter;
-import prometheus.types.Gauge;
-import prometheus.types.Metric;
-import prometheus.types.MetricFamily;
-import prometheus.types.MetricType;
+import io.bpoole6.accumulator.scraper.types.Counter;
+import io.bpoole6.accumulator.scraper.types.Gauge;
+import io.bpoole6.accumulator.scraper.types.Metric;
+import io.bpoole6.accumulator.scraper.types.MetricFamily;
+import io.bpoole6.accumulator.scraper.types.MetricType;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD) //In the future we may want to just reset the registries and maps between tests. Reloading the context may become expensive
@@ -117,12 +117,12 @@ class MetricsConsumerApplicationTests extends  BasicTest{
 				Metric foundMetric = foundMetricFamily.getMetrics().stream().filter(i-> i.getName().equals(metric.getName()) && i.getLabels().equals(metric.getLabels())).findFirst().get();
 				Assertions.assertEquals(metric.getLabels().keySet(), foundMetric.getLabels().keySet());
 				if(metricFamily.getType() == MetricType.COUNTER) {
-					Counter c = ((prometheus.types.Counter)metric);
-					Counter foundC = ((prometheus.types.Counter)foundMetric);
+					Counter c = ((io.bpoole6.accumulator.scraper.types.Counter)metric);
+					Counter foundC = ((io.bpoole6.accumulator.scraper.types.Counter)foundMetric);
 					Assertions.assertEquals(c.getValue()*2, foundC.getValue() );
 				}else if(metricFamily.getType() == MetricType.GAUGE){
-					Gauge g = ((prometheus.types.Gauge)metric);
-					Gauge foundG = ((prometheus.types.Gauge)foundMetric);
+					Gauge g = ((io.bpoole6.accumulator.scraper.types.Gauge)metric);
+					Gauge foundG = ((io.bpoole6.accumulator.scraper.types.Gauge)foundMetric);
 					Assertions.assertEquals(g.getValue(), foundG.getValue() );
 				}
 

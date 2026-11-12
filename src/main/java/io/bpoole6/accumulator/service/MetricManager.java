@@ -36,7 +36,7 @@ public class MetricManager {
         this.metricGroup = metricGroup;
     }
 
-    public void incrementCounter(MetricKey key, prometheus.types.Counter incrementer) {
+    public void incrementCounter(MetricKey key,io.bpoole6.accumulator.scraper.types.Counter incrementer) {
 
         RunnableThrowable runnable = () -> {
             StringJoiner sj = new StringJoiner(",");
@@ -63,7 +63,7 @@ public class MetricManager {
         runReadLockProcess(runnable);
     }
 
-    public void setGauge(MetricKey key, prometheus.types.Gauge metric) {
+    public void setGauge(MetricKey key,io.bpoole6.accumulator.scraper.types.Gauge metric) {
         RunnableThrowable runnable = () -> {
             StringJoiner sj = new StringJoiner(",");
             Map<String, String> tags = RegistryRepository.stripMetaData(key.getTags());
