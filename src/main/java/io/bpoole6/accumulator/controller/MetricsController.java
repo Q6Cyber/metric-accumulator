@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/")
+@Slf4j
 public class MetricsController implements MetricsControllerInterface{
 
   private MetricService metricService;
@@ -66,7 +68,7 @@ public class MetricsController implements MetricsControllerInterface{
           throws IOException, InterruptedException {
     Optional<Group> contextMetricGroup = getMetricGroupFromSecurityContext();
     Group group = this.metricsAccumulatorConfiguration.getMetricGroups().get(metricGroup);
-
+    log.debug("Metric Group {}, metrics: {}", metricGroup, metricGroup);
     if (Objects.nonNull(group)) {
       if(contextMetricGroup.isPresent() && !group.equals(contextMetricGroup.get())) {
         return new ResponseEntity<>("Wrong api key for metric group: " + metricGroup,HttpStatus.UNAUTHORIZED);
